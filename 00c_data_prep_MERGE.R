@@ -30,7 +30,6 @@ d = rbind(
   , disc_replication[,cols] %>% as.data.frame(stringsAsFactors=F)
   , delphi_reanalysis[,cols] %>% as.data.frame(stringsAsFactors=F)
   , disc_reanalysis[,cols] %>% as.data.frame(stringsAsFactors=F)
-  #, replication_data2[,cols] %>% as.data.frame(stringsAsFactors=F)
 ) %>% 
   group_by(task, trial, communication, analysis, dataset) %>%
   mutate(

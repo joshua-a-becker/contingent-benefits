@@ -2,6 +2,7 @@ if(!exists("data_loaded")){
   source("00c_data_prep_MERGE.R")
 }
 
+
 library(texreg)
 library(lme4)
 
@@ -76,7 +77,7 @@ estWithCi(mod2_rep, param="prop_toward:communicationDiscussion")
 ## TABLE S1
 htmlreg( 
   list(mod1_numeric, mod1_disc, mod2)
-, file="Figures/Table S1_fixed.html"
+, file="Figures/Table S2.html"
 #, custom.header=list("Reanalysis"=1:2,"Replication"=3:4)
 ,custom.model.names=c("Numeric","Discussion", "Interaction")
 , custom.coef.map=list(
@@ -91,14 +92,14 @@ htmlreg(
 )
 
 
-## TABLE S2
+## TABLE S3
 htmlreg( 
   list(
     mod1_numeric_rean, mod1_disc_rean, mod2_rean
     ,mod1_numeric_rep, mod1_disc_rep, mod2_rep
     
     )
-  , file="Figures/Table S2_fixed.html"
+  , file="Figures/Table S3.html"
   , custom.header=list("Reanalysis"=1:3,"Replication"=4:6)
   ,custom.model.names=c(
     "Numeric","Discussion","Interaction"

@@ -21,7 +21,7 @@ delphi_replication = read.csv("Replication Data/delphi_data.csv", stringsAsFacto
 
 
 ### get count chat for discussion data
-chat_data_replication = read.csv("Replication Data/chat_data_set1_anonymized.csv", stringsAsFactors=F)
+chat_data_replication = read.csv("Replication Data/chat_data_anonymized.csv", stringsAsFactors=F)
 Encoding(chat_data_replication$text)<-"bytes"
 chat_data_replication = chat_data_replication %>%
   mutate(
@@ -56,37 +56,4 @@ disc_replication = disc_replication_nochat %>%
   )
 
 
-### get count chat for discussion data
-chat_data_replication2 = read.csv("Replication Data/chat_data_set2_anonymized.csv", stringsAsFactors=F) %>%
-  mutate(
-    , playerId = sender
-  ) %>%
-  group_by(playerId, gameId) %>%
-  summarize(
-    count_chat = sum(!is.na(text))
-    , count_words = sum(nchar(text))
-    , count_words = ifelse(is.na(count_words), 0, count_words)
-  )
-
-replication_data2_nochat = read.csv("Replication Data/replication_data_set2.csv") %>%
-  mutate(
-     analysis="replication"
-    , gameId = group_pair
-    , truth = ifelse(task=="In 2019, there was a", 89240, truth)
-  )
-
-replication_data2 = merge(
-  replication_data2_nochat, chat_data_replication2
-  , by=c("playerId","gameId")
-  , all.x = T
-  ) %>%
-  mutate(
-    count_chat = ifelse(is.na(count_chat) & communication=="Discussion",
-                        0,
-                        count_chat)
-  )
-
 data_loaded=14159
-
-names(replication_data2_nochat)
-names(replication_data2)
